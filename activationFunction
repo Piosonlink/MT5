@@ -1,0 +1,5 @@
+double CNeuron::activationFunction(double x)
+  {
+//output range [-1.0..1.0]
+   return tanh(x);
+  }
