@@ -1,0 +1,4 @@
+double CNeuron::activationFunctionDerivative(double x)
+  {
+   return 1/MathPow(cosh(x),2);
+  }
