@@ -1,0 +1,26 @@
+class CNeuron  :  public CObject
+  {
+public:
+                     CNeuron(uint numOutputs,uint myIndex);
+                    ~CNeuron() {};
+   void              setOutputVal(double val) { outputVal=val; }
+   double            getOutputVal() const { return outputVal; }
+   void              feedForward(const CArrayObj *&prevLayer);
+   void              calcOutputGradients(double targetVals);
+   void              calcHiddenGradients(const CArrayObj *&nextLayer);
+   void              updateInputWeights(CArrayObj *&prevLayer);
+   //--- methods for working with files
+   virtual bool      Save(const int file_handle)                         { return(outputWeights.Save(file_handle));   }
+   virtual bool      Load(const int file_handle)                         { return(outputWeights.Load(file_handle));   }
+
+private:
+   double            eta;
+   double            alpha;
+   static double     activationFunction(double x);
+   static double     activationFunctionDerivative(double x);
+   double            sumDOW(const CArrayObj *&nextLayer) const;
+   double            outputVal;
+   CArrayCon         outputWeights;
+   uint              m_myIndex;
+   double            gradient;
+  };
