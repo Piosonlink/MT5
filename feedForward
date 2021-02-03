@@ -1,0 +1,16 @@
+void CNeuron::feedForward(const CArrayObj *&prevLayer)
+  {
+   double sum=0.0;
+   int total=prevLayer.Total();
+   for(int n=0; n<total && !IsStopped(); n++)
+     {
+      CNeuron *temp=prevLayer.At(n);
+      double val=temp.getOutputVal();
+      if(val!=0)
+        {
+         СConnection *con=temp.outputWeights.At(m_myIndex);
+         sum+=val * con.weight;
+        }
+     }
+   outputVal=activationFunction(sum);
+  }
